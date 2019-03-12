@@ -1,0 +1,13 @@
+[MESSAGES CONTROL]
+disable=
+  line-too-long,
+  bare-except,
+  invalid-name,
+  missing-docstring,
+  import-error,
+  too-few-public-methods,
+  useless-import-alias,
+  too-many-locals,
+  too-many-arguments,
+  too-many-statements,
+  too-many-branches

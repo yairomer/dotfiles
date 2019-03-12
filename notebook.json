@@ -1,0 +1,41 @@
+{
+  "stored_keymap": "default",
+  "rise": {
+    "transition": "fade",
+    "scroll": true,
+    "slideNumber": "false"
+  },
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": true
+    }
+  },
+  "Notebook": {
+    "Toolbar": true,
+    "Header": true
+  },
+  "highlight_selected_word": {
+    "highlight_color": "#4463b1",
+    "highlight_color_blurred": "#4463b1",
+    "delay": "1000"
+  },
+  "select_keymap_local_storage": false,
+  "load_extensions": {
+    "spellchecker/main": true,
+    "jupyter-js-widgets/extension": true,
+    "codefolding/main": true,
+    "rise/main": true,
+    "livemdpreview/livemdpreview": true,
+    "notify/notify": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "splitcell/splitcell": true,
+    "scroll_down/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "varInspector/main": true,
+    "highlight_selected_word/main": true,
+    "select_keymap/main": true,
+    "execute_time/ExecuteTime": true,
+    "vim_config/main": true,
+    "scratchpad/main": true
+  }
+}

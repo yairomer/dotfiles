@@ -1,0 +1,15 @@
+## Alias ls
+## ========
+alias lls="ls -alh"
+
+## Mapping vim command to nvim (NeoVim)
+## ====================================
+if [ -x "$(command -v nvim)" ]; then
+    alias vim="nvim"
+fi
+
+## Source machine specific bashrc file
+## ===================================
+if [ -f "$HOME/.bashrc_addon" ]; then
+    source $HOME/.bashrc_addon
+fi
