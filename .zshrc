@@ -38,6 +38,11 @@ if [ -f "$HOME/.bashrc_dotfiles_addon" ]; then
     source $HOME/.bashrc_dotfiles_addon
 fi
 
+## Increase history size
+## =====================
+HISTSIZE=50000
+SAVEHIST=50000
+
 ## Set LANG
 ## ========
 export LANG=en_US.UTF-8
