@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+notebook_file=$1
+
+cp $notebook_file $notebook_file.bak
+
+jq --indent 1 \
+  ' (.cells[] | select(has("outputs")) | .outputs) = []
+  | (.cells[] | select(has("execution_count")) | .execution_count) = null
+  | .cells[].metadata = {}
+  | .metadata_tmp = {}
+  | .metadata_tmp.kernelspec = .metadata.kernelspec
+  | .metadata = .metadata_tmp
+  | del(.metadata_tmp)
+  ' $notebook_file > $notebook_file.tmp
+
+mv $notebook_file.tmp $notebook_file

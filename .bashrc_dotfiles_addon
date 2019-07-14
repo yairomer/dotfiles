@@ -13,3 +13,7 @@ fi
 if [ -f "$HOME/.bashrc_addon" ]; then
     source $HOME/.bashrc_addon
 fi
+
+## Add ~/.dotfiles_bin to path
+## ===========================
+export PATH=$HOME/.dotfiles_bin:$PATH
