@@ -1250,7 +1250,11 @@ run_install_docker() {
     sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common  # allow apt to use a repository over HTTPS
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  # Add Docker’s official GPG key
     ## Verify that the key fingerprint is 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88: sudo apt-key fingerprint 0EBFCD88
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    ubuntu_codename="$(lsb_release -cs)"
+    if [ "$ubuntu_codename" == "cosmic" ]; then
+        ubuntu_codename="bionic"
+    fi
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $ubuntu_codename stable"
     sudo apt-get update || true
     sudo apt-get install -y docker-ce
     ## Test docker installation: sudo docker run hello-world
@@ -1301,6 +1305,9 @@ run_install_nvidia_docker() {
     # Add the package repositories
     curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
     distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+    if [ "$distribution" == "ubuntu18.10" ]; then
+        distribution="ubuntu18.04"
+    fi
     curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
     sudo apt-get update
 
