@@ -1,0 +1,44 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "alt+Left",
+        "command": "workbench.action.navigateLeft"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.navigateLeft",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+Right",
+        "command": "workbench.action.navigateRight"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.navigateRight",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+Up",
+        "command": "workbench.action.navigateUp"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.navigateUp",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+Down",
+        "command": "workbench.action.navigateDown"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.navigateDown",
+        "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+]

@@ -1,0 +1,156 @@
+{
+		"python.pythonPath": "/app/dockvenv/bin/python3",
+		"diffEditor.originalEditable": true,
+		"window.zoomLevel": -1,
+		"editor.renderWhitespace": "all",
+		"editor.minimap.enabled": false,
+		"files.autoSave": "afterDelay",
+		"remote.SSH.configFile": "/home/omeryair/workspace/projects/infrastructure/ssh_config",
+		"python.linting.pylintPath": "/app/dockvenv/bin/pylint",
+		"python.linting.pylintArgs": [
+			"--generated-members=numpy.*,numpy.random.*,torch.*,cv2.*,cv.*"
+		],
+		"python.linting.pylintEnabled": true,
+		"path-intellisense.absolutePathToWorkspace": false,
+		"path-intellisense.showHiddenFiles": true,
+		"cSpell.diagnosticLevel": "Hint",
+		// "vim.enableNeovim": true,
+		// "vim.neovimPath": "/usr/bin/nvim",
+		"vim.foldfix": true,
+		"vim.leader": "<space>",
+		"vim.handleKeys": {
+				"<C-k>": false,
+				"<C-b>": false
+		},
+		"vim.hlsearch": true,
+		"vim.visualModeKeyBindings": [
+				{
+					"before": [";"],
+					"after": [":"]
+				},
+				{
+					"before": ["leader", "d"],
+					"after": ["\"", "*", "d"]
+				},
+				{
+					"before": ["leader", "d", "d"],
+					"after": ["\"", "*", "d", "d"]
+				},
+				{
+					"before": ["leader", "D"],
+					"after": ["\"", "*", "D"]
+				},
+				{
+					"before": ["leader", "y", "y"],
+					"after": ["\"", "*", "y", "y"]
+				},
+				{
+					"before": ["leader", "y"],
+					"after": ["\"", "*", "y"]
+				},
+				{
+					"before": ["leader", "Y"],
+					"after": ["\"", "*", "y", "$"]
+				},
+				{
+					"before": ["leader", "p"],
+					"after": ["\"", "*", "p"]
+				},
+				{
+					"before": ["leader", "P"],
+					"after": ["\"", "*", "P"]
+				}
+		],
+		"vim.normalModeKeyBindings": [
+				{
+					"before": [";"],
+					"after": [":"]
+				},
+				{
+					"before": ["leader", "d"],
+					"after": ["\"", "*", "d"]
+				},
+				{
+					"before": ["leader", "d", "d"],
+					"after": ["\"", "*", "d", "d"]
+				},
+				{
+					"before": ["leader", "D"],
+					"after": ["\"", "*", "D"]
+				},
+				{
+					"before": ["leader", "y"],
+					"after": ["\"", "*", "y"]
+				},
+				{
+					"before": ["leader", "y", "y"],
+					"after": ["\"", "*", "y", "y"]
+				},
+				{
+					"before": ["leader", "Y"],
+					"after": ["\"", "*", "y", "$"]
+				},
+				{
+					"before": ["leader", "p"],
+					"after": ["\"", "*", "p"]
+				},
+				{
+					"before": ["leader", "P"],
+					"after": ["\"", "*", "P"]
+				},
+				{
+					"before": ["leader", "u"],
+					"after": ["y", "y", "p", "_", "w", "<C-v>", "$", "r", "-", "x"]
+				},
+				{
+					"before": ["leader", "U"],
+					"after": ["y", "y", "p", "_", "w", "<C-v>", "$", "r", "=", "x"]
+				}
+		],
+		"vim.insertModeKeyBindings": [
+				{
+					"before": ["j", "k"],
+					"after": ["<Esc>"]
+				}
+		],
+		"vim.normalModeKeyBindingsNonRecursive": [
+				{
+						"before": ["leader", "w"],
+						"commands": [
+								"workbench.action.files.save",
+						]
+				},
+				{
+						"before": ["g", "b"],
+						"commands": [
+								"workbench.action.quickOpenNavigateNextInEditorPicker",
+						]
+				},
+				{
+						"before": ["leader", "b"],
+						"commands": [
+								"workbench.action.quickOpen",
+						]
+				},
+				{
+					"before":["leader", "<Space>"],
+					"commands": [
+							":nohl"
+					]
+			}
+		],
+		"vim.useSystemClipboard": false,
+		"telemetry.enableTelemetry": false,
+		"telemetry.enableCrashReporter": false,
+		"python.jediEnabled": false,
+		"python.dataScience.sendSelectionToInteractiveWindow": true,
+		"editor.fontSize": 12,
+		"editor.autoClosingBrackets": "never",
+		"editor.autoClosingQuotes": "never",
+		"python.dataScience.askForKernelRestart": false,
+		"update.mode": "manual",
+		"files.autoSaveDelay": 60000,
+		"cSpell.userWords": [
+			"Dataset"
+		],
+}

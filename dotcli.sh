@@ -878,7 +878,7 @@ run_link_dotfiles() {
         mkdir $HOME/.dotfiles_backup/.config
         mkdir $HOME/.dotfiles_backup/.vim
         mkdir -p $HOME/.dotfiles_backup/.jupyter/nbconfig/
-        for i in .bashrc .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .config/nvim .vim/init.vim .jupyter/nbconfig/notebook.json .dotfiles_bin; do
+        for i in .bashrc .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .config/nvim .vim/init.vim .jupyter/nbconfig/notebook.json .dotfiles_bin .config/Code/User/settings.json .config/Code/User/keybindings.json; do
             if [[ (-f "$HOME/$i"  || -d "$HOME/$i")  && !(-f "$HOME/.dotfiles_backup/$i"  || -d "$HOME/.dotfiles_backup/$i") ]]; then
                 cp -r $HOME/$i $HOME/.dotfiles_backup/$i
             fi
@@ -912,6 +912,10 @@ run_link_dotfiles() {
     for i in .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .bashrc_dotfiles_addon .dotfiles_bin; do
         ln -sfT ./.dotfiles/$i $HOME/$i
     done
+
+    echo "-> linking vscode dot files"
+    ln -sfT ../../../.dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
+    ln -sfT ../../../.dotfiles/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 
     echo "-> Linking NeoVim configuration file to Vim's"
     mkdir -p $HOME/.config
@@ -1492,7 +1496,7 @@ run_setup_gui_stuff() {
 
     ## ==========================
     echo "-> Set favorite apps"
-    gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'gnome-control-center.desktop', 'google-chrome.desktop', 'pycharm-community_pycharm-community.desktop', 'mendeleydesktop.desktop', 'spotify_spotify.desktop']"
+    gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'code_code.desktop', 'gnome-control-center.desktop', 'google-chrome.desktop', 'pycharm-community_pycharm-community.desktop', 'mendeleydesktop.desktop', 'spotify_spotify.desktop']"
 
     ## ==========================
     echo "-> Install system-monitor indicator"
@@ -1585,6 +1589,62 @@ run_setup_gui_stuff() {
         popd
         rm /tmp/mendeleydesktop-latest
     fi
+
+    ## ==========================
+    echo "-> Install VSCode"
+    sudo snap install code --classic
+
+    echo "-> Install VSCode extensions"
+    ## General
+    ## -------
+    code --install-extension streetsidesoftware.code-spell-checker
+    code --install-extension vscodevim.vim
+    code --install-extension CoenraadS.bracket-pair-colorizer
+    code --install-extension extr0py.vscode-relative-line-numbers
+    code --install-extension jdinhlife.gruvbox
+    code --install-extension christian-kohler.path-intellisense
+
+    ## Python
+    ## ------
+    code --install-extension ms-python.python
+
+    ## Bash
+    ## ----
+    code --install-extension rogalmic.bash-debug
+    code --install-extension mads-hartmann.bash-ide-vscode
+    sudo npm i -g bash-language-server
+
+    ## Web
+    ## ---
+    code --install-extension ritwickdey.LiveServer
+    code --install-extension ms-vscode.cpptools msjsdiag.debugger-for-chrome
+
+    ## Markdown
+    ## --------
+    code --install-extension DavidAnson.vscode-markdownlint
+    code --install-extension goessner.mdmath
+    code --install-extension bierner.markdown-preview-github-styles
+
+    ## CSV
+    ## ---
+    code --install-extension mechatroner.rainbow-csv
+    code --install-extension janisdd.vscode-edit-csv
+
+    ## XML
+    ## ---
+    code --install-extension DotJoshJohnson.xml
+
+    ## SVG
+    ## ---
+    code --install-extension jock.svg
+
+    ## Docker
+    ## ------
+    # code --install-extension ms-azuretools.vscode-docker
+
+    ## Remote
+    ## ------
+    code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 
     ## ==========================
     echo "-> Install PyCharm"
@@ -1822,7 +1882,7 @@ run_clean_up_dotfiles() {
     ## ---
     echo "-> Cleaning up"
 
-    for i in .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .bashrc_dotfiles_addon .config/nvim .vim/init.vim .jupyter/nbconfig/notebook.json; do
+    for i in .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .bashrc_dotfiles_addon .config/Code/User/settings.json .config/Code/User/keybindings.json .config/nvim .vim/init.vim .jupyter/nbconfig/notebook.json .conf; do
         if [[ -f "$HOME/$i"  || -d "$HOME/$i"  ]]; then
             rm -r $HOME/$i
         fi
