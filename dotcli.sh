@@ -1105,9 +1105,11 @@ run_create_python_venv() {
 
     add_line $HOME/.bashrc_addon "## Create an alias of the vitrual python environment and activate it" "Python virtual environment"
     add_line $HOME/.bashrc_addon "## =================================================================" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "VIRTUAL_ENV_DISABLE_PROMPT=1" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "alias pyenv=\"source \$HOME/venv/bin/activate\"" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "pyenv" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "if [[ -z \"\$(awk -F/ '\$2 == \"docker\"' /proc/self/cgroup)\" ]]; then" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "    VIRTUAL_ENV_DISABLE_PROMPT=1" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "    alias pyenv=\"source \$HOME/venv/bin/activate\"" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "    pyenv" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "fi" "Python virtual environment"
 }
 
 ## install_python_basic
@@ -1154,7 +1156,13 @@ run_install_python_basic() {
         matplotlib==3.0.0 \
         pandas==0.23.4 \
         pyyaml==3.13
-    add_line $HOME/.bashrc_addon "export MPLBACKEND=Agg" "Python"
+    if [ -z "$(sudo grep "^    export MPLBACKEND=.*$" "$HOME/.bashrc_addon")" ]; then
+        add_line $HOME/.bashrc_addon "## Set the default matplotlib backend" "Python"
+        add_line $HOME/.bashrc_addon "## ==================================" "Python"
+        add_line $HOME/.bashrc_addon "if [[ -z "$MPLBACKEND" ]]; then" "Python"
+        add_line $HOME/.bashrc_addon "    export MPLBACKEND=Agg" "Python"
+        add_line $HOME/.bashrc_addon "fi" "Python"
+    fi
 }
 
 ## setup_jupyter
@@ -1433,7 +1441,7 @@ run_setup_gui_stuff() {
     ## Matplotlib backend
     ## ==================
     echo "-> Change MatPlotLibs's default backend"
-    change_line $HOME/.bashrc_addon "^export MPLBACKEND=.*$" "export MPLBACKEND=Qt5Agg" 
+    change_line $HOME/.bashrc_addon "^    export MPLBACKEND=.*$" "  export MPLBACKEND=Qt5Agg" 
 
     # ## Unity
     # ## ==========================
