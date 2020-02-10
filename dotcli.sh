@@ -665,7 +665,8 @@ run_install_basic_tools() {
         python3-pip \
         python \
         python-dev \
-        python-pip
+        python-pip \
+        npm
     ## Utilities
     sudo apt-get install -y -qq \
         sshfs \
