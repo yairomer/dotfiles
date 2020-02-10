@@ -1992,13 +1992,18 @@ _dotcli() {
 complete -F _dotcli dotcli
 EOL
     
-    cat <<EOL | sudo tee /usr/share/zsh/vendor-completions/_dotcli > /dev/null
+    if [ ! -d "$HOME/.oh-my-zsh/completions" ]; then
+        mkdir -p $HOME/.oh-my-zsh/completions
+    fi
+    cat <<EOL | tee $HOME/.oh-my-zsh/completions/_dotcli > /dev/null
 #compdef dotcli
 
 source ${dotfiles_folder}/dotcli.sh
 _zsh_completion
 EOL
 
+echo "-> Removing and recreating compinit dump files"
+rm ~/.zcompdump*
 }
 
 ## _bash_completion
