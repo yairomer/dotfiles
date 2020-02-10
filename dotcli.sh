@@ -1698,6 +1698,21 @@ run_setup_gui_stuff() {
     ## ==========================
     echo "-> Install Spotify"
     sudo snap install spotify
+
+    # ## ==========================
+    # echo "-> Arc-Dark theme"
+    # sudo add-apt-repository -y ppa:noobslab/themes
+    # sudo apt-get update
+    # sudo apt-get install -y arc-theme
+    # gsettings set org.gnome.desktop.interface gtk-theme use-system-font Arc-Dark
+    # gsettings set org.gnome.settings-daemon.plugins.xsettings hinting slight
+
+    # ## ==========================
+    # echo "-> Papirus icons"
+    # sudo add-apt-repository -y ppa:papirus/papirus
+    # sudo apt-get update
+    # sudo apt-get install -y papirus-icon-theme
+    # gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 }
 
 ## install_ocamlfuse
