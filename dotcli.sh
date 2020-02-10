@@ -340,7 +340,7 @@ run_set_passwordless_sudo() {
     if [[ -z "$username" ]]; then
         username=$USER
     fi
-    add_line /etc/sudoers "$username ALL=(ALL:ALL) NOPASSWD: ALL" "Passwordless sudo"
+    add_line /etc/sudoers "$username ALL=(ALL:ALL) NOPASSWD: ALL" "Passwordless sudo $username"
 }
 
 ## setup_ssh_server
