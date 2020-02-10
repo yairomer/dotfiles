@@ -30,11 +30,10 @@ main_cli() {
     fi
 
     if [ "$#" -lt 1 ]; then
-        echo "Error: Was expecting a command" 2>&2
+        echo "Error: $app_name expects a command as first argument" 1>&2
         usage
         exit 1
     fi
-
     subcommand=$1; shift
 
     while getopts ":h" opt; do
@@ -47,13 +46,6 @@ main_cli() {
         esac
     done
     shift $((OPTIND -1))
-
-    if [ "$#" -lt 1 ]; then
-        echo "Error: $app_name expects a command as first argument" 1>&2
-        usage
-        exit 1
-    fi
-    subcommand=$1; shift
 
     if ! is_valid_subcommand $subcommand; then
         echo "Error: unknown command $subcommand" 1>&2
