@@ -10,4 +10,6 @@ disable=
   too-many-locals,
   too-many-arguments,
   too-many-statements,
-  too-many-branches
+  too-many-branches,
+  logging-format-interpolation,
+  logging-not-lazy
