@@ -1563,18 +1563,22 @@ run_setup_gui_stuff() {
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'il')]"
     gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Alt>Shift_L']"
 
-    # ## ==========================
-    # default_terminal_id=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
-    # if [ -z "$(gsettings get org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${default_terminal_id}/ font | grep Powerline)" ]; then
-    #     echo "-> Install powerline fonts"
-    #     git clone https://github.com/powerline/fonts.git /tmp/fonts --depth=1
-    #     pushd /tmp/fonts
-    #     ./install.sh
-    #     popd
-    #     rm -rf /tmp/fonts
-    #     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${default_terminal_id}/ use-system-font false
-    #     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${default_terminal_id}/ font "Droid Sans Mono Dotted for Powerline 10"
-    # fi
+    ## ==========================
+    if [ ! -d "/usr/share/fonts/JetBrainsMono" ]; then
+        echo "-> Installing JetBarins Mono Font"
+        pushd /tmp
+        wget -N https://download.jetbrains.com/fonts/JetBrainsMono-1.0.2.zip
+        unzip -o JetBrainsMono-1.0.2.zip
+        sudo mkdir /usr/share/fonts/JetBrainsMono
+        sudo mv JetBrainsMono-1.0.2/ttf/*.ttf /usr/share/fonts/JetBrainsMono
+        rm -r JetBrainsMono-1.0.2
+        rm JetBrainsMono-1.0.2.zip
+        popd
+    fi
+    echo "-> Setting font"
+    default_terminal_id=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+    gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${default_terminal_id}/ use-system-font false
+    gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${default_terminal_id}/ font 'JetBrains Mono Medium, Medium 8'
 
     ## ==========================
     if [ -z "$(cat $HOME/.dir_colors/dircolors | grep gruvbox)" ]; then
