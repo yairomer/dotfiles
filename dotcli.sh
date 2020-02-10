@@ -383,7 +383,7 @@ descriptions_tmp+=( "Enable SSH login using username and password (without an SS
 
 run_enable_ssh_password_login() {
 
-    run_restart_ssh_daemon=false
+    run_restart_ssh_daemon=true
 
     ## CLI
     ## ---
@@ -405,7 +405,7 @@ run_enable_ssh_password_login() {
     while getopts "d" opt; do
         case $opt in
             d)
-                run_restart_ssh_daemon=true
+                run_restart_ssh_daemon=false
                 ;;
             \? )
                 echo "Error: Invalid Option: -$OPTARG" 1>&2
@@ -438,7 +438,7 @@ descriptions_tmp+=( "Disable the option to connect as root through SSH." )
 
 run_disable_ssh_root_login() {
 
-    run_restart_ssh_daemon=false
+    run_restart_ssh_daemon=true
 
     ## CLI
     ## ---
@@ -460,7 +460,7 @@ run_disable_ssh_root_login() {
     while getopts "d" opt; do
         case $opt in
             d)
-                run_restart_ssh_daemon=true
+                run_restart_ssh_daemon=false
                 ;;
             \? )
                 echo "Error: Invalid Option: -$OPTARG" 1>&2
