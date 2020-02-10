@@ -880,7 +880,7 @@ run_link_dotfiles() {
     if [ ! -d "$HOME/.dotfiles_backup" ]; then
         echo "-> backing up dotfiles"
         mkdir $HOME/.dotfiles_backup
-        mkdir $HOME/.dotfiles_backup/.config
+        mkdir -p $HOME/.dotfiles_backup/.config/Code/User
         mkdir $HOME/.dotfiles_backup/.vim
         mkdir -p $HOME/.dotfiles_backup/.jupyter/nbconfig/
         for i in .bashrc .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .config/nvim .vim/init.vim .jupyter/nbconfig/notebook.json .dotfiles_bin .config/Code/User/settings.json .config/Code/User/keybindings.json; do
