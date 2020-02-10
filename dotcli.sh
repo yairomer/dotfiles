@@ -687,7 +687,8 @@ run_install_basic_tools() {
         silversearcher-ag \
         ctags \
         cscope \
-        jq
+        jq \
+        pylint
     ## General development dependencies
     sudo apt-get install -y -qq \
         libblas-dev \
