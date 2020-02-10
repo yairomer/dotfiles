@@ -13,7 +13,7 @@ main_cli() {
     usage() {
         echo "A CLI tool for running common setup commands"
         echo ""
-        echo "usage: $app_name  <command>"
+        echo "usage: $app_name <command> [<args>]"
         echo "   or: $app_name -h         to print this help message."
         echo ""
         echo "Commands"
@@ -39,10 +39,6 @@ main_cli() {
 
     while getopts ":h" opt; do
         case $opt in
-            h )
-                usage
-                exit 0
-                ;;
             \? )
                 echo "Error: Invalid Option: -$OPTARG" 1>&2
                 usage
@@ -51,6 +47,13 @@ main_cli() {
         esac
     done
     shift $((OPTIND -1))
+
+    if [ "$#" -lt 1 ]; then
+        echo "Error: $app_name expects a command as first argument" 1>&2
+        usage
+        exit 1
+    fi
+    subcommand=$1; shift
 
     if ! is_valid_subcommand $subcommand; then
         echo "Error: unknown command $subcommand" 1>&2
