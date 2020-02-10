@@ -1330,6 +1330,46 @@ run_install_nvidia_docker() {
     # fi
 }
 
+## install_nvtop
+## -------------
+subcommands+=( "install_nvtop" )
+descriptions_tmp+=( "Install NVTop." )
+
+run_install_nvtop() {
+    ## CLI
+    ## ---
+    usage () {
+        echo descriptions[$subcommand]
+        echo ""
+        echo "usage: $app_name $subcommand username"
+        echo "   or: $app_name $subcommand -h          to print this help message"
+    }
+
+    if [ "$#" -eq 1 ] && [ "$1" ==  "-h" ]; then
+        usage
+        exit 0
+    fi
+
+    if [ "$#" -gt 0 ]; then
+        echo "Error: Unexpected arguments: $@" 1>&2
+        usage
+        exit 1
+    fi
+    
+    ## Run
+    ## ---
+    echo "-> Install nvtop"
+    sudo apt install -y libncurses5-dev libncursesw5-dev
+    git clone https://github.com/Syllo/nvtop.git /tmp/nvtop
+    mkdir /tmp/nvtop/build
+    pushd /tmp/nvtop/build
+    cmake ..  -DNVML_RETRIEVE_HEADER_ONLINE=True
+    make
+    sudo make install
+    popd
+    rm -rf /tmp/nvtop
+}
+
 ## install_openvpn_client
 ## ----------------------
 subcommands+=( "install_openvpn_client" )
