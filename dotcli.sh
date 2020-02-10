@@ -1149,7 +1149,7 @@ run_install_python_basic() {
         libpng-dev \
         python-qt4 \
         python3-pyqt5
-    pip3 install pip==18.1
+    pip3 install pip==9.0.3
     hash -r pip
     pip3 install -U \
         ipython==7.0.1 \
