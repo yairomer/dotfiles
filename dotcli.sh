@@ -1618,6 +1618,10 @@ run_setup_gui_stuff() {
     sudo apt-get install -y vlc
 
     ## ==========================
+    echo "-> Install krita"
+    sudo apt-get install -y krita
+
+    ## ==========================
     echo "-> Install mpv"
     sudo apt-get install -y mpv
 
