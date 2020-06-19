@@ -1592,6 +1592,10 @@ run_setup_gui_stuff() {
     fi
 
     ## ==========================
+    echo "-> Install Tex Live"
+    sudo apt-get install -y texlive-latex-extra
+
+    ## ==========================
     echo "-> Install OpenVPN Network manager support"
     sudo apt-get install -y openvpn network-manager-openvpn network-manager-openvpn-gnome
 

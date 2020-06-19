@@ -157,4 +157,80 @@
 	"editor.fontSize": 12,
 	"editor.fontWeight": "500",
 	"workbench.colorTheme": "Gruvbox Dark Medium",
+	"gitlens.codeLens.enabled": false,
+	"latex-workshop.view.pdf.viewer": "tab",
+	"[sass]": {
+		"editor.tabSize": 2
+	},
+	"[html]": {
+		"editor.tabSize": 4
+	},
+	"[javascript]": {
+		"editor.tabSize": 2
+	},
+	"latex-workshop.latex.outDir": "%DIR%/build",
+	"latex-workshop.latex.tools": [
+		{
+			"name": "latexmk",
+			"command": "latexmk",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-pdf",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "lualatexmk",
+			"command": "latexmk",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-lualatex",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "latexmk_rconly",
+			"command": "latexmk",
+			"args": [
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "pdflatex",
+			"command": "pdflatex",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "bibtex",
+			"command": "bibtex",
+			"args": [
+				"%DOCFILE%"
+			],
+			"env": {}
+		},
+		{
+			"name": "rnw2tex",
+			"command": "Rscript",
+			"args": [
+				"-e",
+				"knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+			],
+			"env": {}
+		}
+	],
 }
