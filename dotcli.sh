@@ -1696,6 +1696,11 @@ run_setup_gui_stuff() {
     ## SVG
     ## ---
     code --install-extension jock.svg
+    code --install-extension cssho.vscode-svgviewer
+
+    ## Latex
+    ## -----
+    code --install-extension James-Yu.latex-workshop
 
     ## Docker
     ## ------
