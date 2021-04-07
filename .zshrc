@@ -38,6 +38,10 @@ if [ -f "$HOME/.bashrc_dotfiles_addon" ]; then
     source $HOME/.bashrc_dotfiles_addon
 fi
 
+## Shere history between terminals
+## ===============================
+setopt share_history
+
 ## Increase history size
 ## =====================
 HISTSIZE=50000
