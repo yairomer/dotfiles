@@ -901,9 +901,9 @@ run_link_dotfiles() {
     fi
 
     if [ -d "$HOME/.config/Code" ]; then
-    echo "-> linking vscode dot files"
-    ln -sfT ../../../.dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
-    ln -sfT ../../../.dotfiles/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
+        echo "-> linking vscode dot files"
+        ln -sfT ../../../.dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
+        ln -sfT ../../../.dotfiles/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
     fi
 
     echo "-> Linking NeoVim configuration file to Vim's"
@@ -1603,6 +1603,18 @@ run_setup_gui_stuff() {
     echo "-> Install Spotify"
     sudo snap install spotify
 
+    ## ==========================
+    echo "-> Install Skype"
+    sudo snap install skype --classic
+
+    ## ==========================
+    echo "-> Install Zoom"
+    sudo snap install zoom-client
+
+    ## ==========================
+    echo "-> Install Inkscape"
+    sudo snap install inkscape
+
     # ## ==========================
     # echo "-> Arc-Dark theme"
     # sudo add-apt-repository -y ppa:noobslab/themes
@@ -1939,19 +1951,19 @@ complete -F _dotcli dotcli
 EOL
     
     if [ -d "$HOME/.oh-my-zsh" ]; then
-    if [ ! -d "$HOME/.oh-my-zsh/completions" ]; then
-        mkdir -p $HOME/.oh-my-zsh/completions
-    fi
-    cat <<EOL | tee $HOME/.oh-my-zsh/completions/_dotcli > /dev/null
+        if [ ! -d "$HOME/.oh-my-zsh/completions" ]; then
+            mkdir -p $HOME/.oh-my-zsh/completions
+        fi
+        cat <<EOL | tee $HOME/.oh-my-zsh/completions/_dotcli > /dev/null
 #compdef dotcli
 
 source ${dotfiles_folder}/dotcli.sh
 _zsh_completion
 EOL
 
-echo "-> Removing and recreating compinit dump files"
+        echo "-> Removing and recreating compinit dump files"
         if [ "$(ls -A ~/.zcompdump*)" ]; then
-rm ~/.zcompdump*
+            rm ~/.zcompdump*
         fi
     fi
 }
