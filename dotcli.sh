@@ -1644,6 +1644,7 @@ run_install_vscode_extensions() {
     code --install-extension cssho.vscode-svgviewer
     code --install-extension DavidAnson.vscode-markdownlint
     code --install-extension DotJoshJohnson.xml
+    code --install-extension eamodio.gitlens
     code --install-extension esbenp.prettier-vscode
     code --install-extension extr0py.vscode-relative-line-numbers
     code --install-extension goessner.mdmath
