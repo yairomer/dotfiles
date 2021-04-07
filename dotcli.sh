@@ -36,17 +36,6 @@ main_cli() {
     fi
     subcommand=$1; shift
 
-    while getopts ":h" opt; do
-        case $opt in
-            \? )
-                echo "Error: Invalid Option: -$OPTARG" 1>&2
-                usage
-                exit 1
-                ;;
-        esac
-    done
-    shift $((OPTIND -1))
-
     if ! is_valid_subcommand $subcommand; then
         echo "Error: unknown command $subcommand" 1>&2
         usage
@@ -380,7 +369,7 @@ run_enable_ssh_password_login() {
     ## CLI
     ## ---
     usage () {
-        echo descriptions[$subcommand]
+        echo "${descriptions[$subcommand]}"
         echo ""
         echo "usage: $app_name $subcommand [<options>]"
         echo "   or: $app_name $subcommand -h          to print this help message"
@@ -896,6 +885,12 @@ run_link_dotfiles() {
         fi
     fi
 
+    echo "-> linking dot files"
+    for i in .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .bashrc_dotfiles_addon .dotfiles_bin; do
+        ln -sfT ./.dotfiles/$i $HOME/$i
+    done
+    touch ~/.bashrc_addon
+
     echo "-> Sourcing .bash_dotfiles_addon in .bashrc"
     if [ -z "$(grep -Fx "## Added by dotcli" $HOME/.bashrc)" ]; then
         printf "\n## Added by dotcli\n## Added by dotcli - end"  >> $HOME/.bashrc
@@ -905,14 +900,11 @@ run_link_dotfiles() {
         sed -i "/## Added by dotcli - end/iif [ -f \"\$HOME/.bashrc_dotfiles_addon\" ]; then\n    source \$HOME/.bashrc_dotfiles_addon\nfi" $HOME/.bashrc
     fi
 
-    echo "-> linking dot files"
-    for i in .tmux.conf .zshrc .vimrc .pylintrc .gitconfig .mpv .bashrc_dotfiles_addon .dotfiles_bin; do
-        ln -sfT ./.dotfiles/$i $HOME/$i
-    done
-
+    if [ -d "$HOME/.config/Code" ]; then
     echo "-> linking vscode dot files"
     ln -sfT ../../../.dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
     ln -sfT ../../../.dotfiles/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
+    fi
 
     echo "-> Linking NeoVim configuration file to Vim's"
     mkdir -p $HOME/.config
@@ -1099,16 +1091,16 @@ run_create_python_venv() {
     if [ ! -d "$HOME/venv" ]; then
         echo "-> Create python vitualenv"
         sudo pip3 install -U virtualenv
-        virtualenv $HOME/venv --no-site-packages
+        virtualenv $HOME/venv # --no-site-packages
         source $HOME/venv/bin/activate
     fi
 
     add_line $HOME/.bashrc_addon "## Create an alias of the vitrual python environment and activate it" "Python virtual environment"
     add_line $HOME/.bashrc_addon "## =================================================================" "Python virtual environment"
     add_line $HOME/.bashrc_addon "if [[ -z \"\$(awk -F/ '\$2 == \"docker\"' /proc/self/cgroup)\" ]]; then" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "    VIRTUAL_ENV_DISABLE_PROMPT=1" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "    alias pyenv=\"source \$HOME/venv/bin/activate\"" "Python virtual environment"
-    add_line $HOME/.bashrc_addon "    pyenv" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "\\ \\ \\ \\ VIRTUAL_ENV_DISABLE_PROMPT=1" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "\\ \\ \\ \\ alias pyenv=\"source \$HOME/venv/bin/activate\"" "Python virtual environment"
+    add_line $HOME/.bashrc_addon "\\ \\ \\ \\ source \$HOME/venv/bin/activate" "Python virtual environment"
     add_line $HOME/.bashrc_addon "fi" "Python virtual environment"
 }
 
@@ -1157,11 +1149,11 @@ run_install_python_basic() {
         pandas==0.23.4 \
         pyyaml==3.13
     if [ -z "$(sudo grep "^    export MPLBACKEND=.*$" "$HOME/.bashrc_addon")" ]; then
-        add_line $HOME/.bashrc_addon "## Set the default matplotlib backend" "Python"
-        add_line $HOME/.bashrc_addon "## ==================================" "Python"
-        add_line $HOME/.bashrc_addon "if [[ -z "$MPLBACKEND" ]]; then" "Python"
-        add_line $HOME/.bashrc_addon "    export MPLBACKEND=Agg" "Python"
-        add_line $HOME/.bashrc_addon "fi" "Python"
+        add_line $HOME/.bashrc_addon "## Set the default matplotlib backend" "Python setup"
+        add_line $HOME/.bashrc_addon "## ==================================" "Python setup"
+        add_line $HOME/.bashrc_addon "if [[ -z \"\$MPLBACKENDi\" ]]; then" "Python setup"
+        add_line $HOME/.bashrc_addon "\\ \\ \\ \\ export MPLBACKEND=Agg" "Python setup"
+        add_line $HOME/.bashrc_addon "fi" "Python setup"
     fi
 }
 
@@ -1259,11 +1251,8 @@ run_install_docker() {
     sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common  # allow apt to use a repository over HTTPS
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  # Add Docker’s official GPG key
     ## Verify that the key fingerprint is 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88: sudo apt-key fingerprint 0EBFCD88
-    ubuntu_codename="$(lsb_release -cs)"
-    if [ "$ubuntu_codename" == "cosmic" ]; then
-        ubuntu_codename="bionic"
-    fi
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $ubuntu_codename stable"
+    distribution="$(lsb_release -cs)"
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $distribution stable"
     sudo apt-get update || true
     sudo apt-get install -y docker-ce
     ## Test docker installation: sudo docker run hello-world
@@ -1443,52 +1432,6 @@ run_setup_gui_stuff() {
     echo "-> Change MatPlotLibs's default backend"
     change_line $HOME/.bashrc_addon "^    export MPLBACKEND=.*$" "  export MPLBACKEND=Qt5Agg" 
 
-    # ## Unity
-    # ## ==========================
-    # echo "-> Don\'t suspend on lid close when plugged in"
-    # gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action nothing
-
-    # # ## ==========================
-    # # echo "-> Set touchpad speed"
-    # # gsettings set ???
-
-    # ## ==========================
-    # echo "-> Set favorite apps"
-    # gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://org.gnome.Terminal.desktop', 'application://org.gnome.Nautilus.desktop', 'application://google-chrome.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
-
-    # ## ==========================
-    # echo "-> Install Indicator-mutiload"
-    # sudo apt-get install -y indicator-multiload
-    # gsettings set de.mh21.indicator-multiload.general settings-version "uint32 3"
-    # gsettings set de.mh21.indicator-multiload.general autostart true
-    # gsettings set de.mh21.indicator-multiload.general color-scheme 'traditional'
-    # gsettings set de.mh21.indicator-multiload.graphs.cpu enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.cpu1 color 'traditional:cpu1'
-    # gsettings set de.mh21.indicator-multiload.traces.cpu2 color 'traditional:cpu2'
-    # gsettings set de.mh21.indicator-multiload.traces.cpu3 color 'traditional:cpu3'
-    # gsettings set de.mh21.indicator-multiload.traces.cpu4 color 'traditional:cpu4'
-    # gsettings set de.mh21.indicator-multiload.graphs.mem enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.mem1 color 'traditional:mem1'
-    # gsettings set de.mh21.indicator-multiload.traces.mem2 color 'traditional:mem2'
-    # gsettings set de.mh21.indicator-multiload.traces.mem3 color 'traditional:mem3'
-    # gsettings set de.mh21.indicator-multiload.traces.mem4 color 'traditional:mem4'
-    # gsettings set de.mh21.indicator-multiload.graphs.net enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.net1 color 'traditional:net1'
-    # gsettings set de.mh21.indicator-multiload.traces.net2 color 'traditional:net2'
-    # gsettings set de.mh21.indicator-multiload.traces.net3 color 'traditional:net3'
-    # gsettings set de.mh21.indicator-multiload.graphs.swap enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.swap1 color 'traditional:swap1'
-    # gsettings set de.mh21.indicator-multiload.graphs.load enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.load1 color 'traditional:load1'
-    # gsettings set de.mh21.indicator-multiload.graphs.disk enabled true
-    # gsettings set de.mh21.indicator-multiload.traces.disk1 color 'traditional:disk1'
-    # gsettings set de.mh21.indicator-multiload.traces.disk2 color 'traditional:disk2'
-    # gsettings set de.mh21.indicator-multiload.general background-color "traditional:background"
-
-    # # ## ==========================
-    # # echo "-> Disable sticky edges"
-    # # dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-capture-mouse false
-
     ## GNOME
     ## =====
     echo "Install Gnome Tweak tool"
@@ -1545,7 +1488,7 @@ run_setup_gui_stuff() {
 
     ## ==========================
     echo "-> Install system-monitor indicator"
-    sudo apt-get install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
+    sudo apt install -y gir1.2-gtop-2.0 gir1.2-nm-1.0 gir1.2-clutter-1.0
     sudo apt-get install -y chrome-gnome-shell
     # gsettings set org.gnome.shell.extensions.system-monitor cpu-graph-width 50
     # gsettings set org.gnome.shell.extensions.system-monitor memory-graph-width 50
@@ -1603,7 +1546,7 @@ run_setup_gui_stuff() {
 
     ## ==========================
     echo "-> Install GVim"
-    sudo apt-get install -y vim-gnome
+    sudo apt-get install -y vim-gtk3
 
     ## ==========================
     echo "-> Install GParted"
@@ -2001,6 +1944,7 @@ _dotcli() {
 complete -F _dotcli dotcli
 EOL
     
+    if [ -d "$HOME/.oh-my-zsh" ]; then
     if [ ! -d "$HOME/.oh-my-zsh/completions" ]; then
         mkdir -p $HOME/.oh-my-zsh/completions
     fi
@@ -2012,7 +1956,10 @@ _zsh_completion
 EOL
 
 echo "-> Removing and recreating compinit dump files"
+        if [ "$(ls -A ~/.zcompdump*)" ]; then
 rm ~/.zcompdump*
+        fi
+    fi
 }
 
 ## _bash_completion
