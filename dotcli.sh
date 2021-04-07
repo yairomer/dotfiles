@@ -647,10 +647,10 @@ run_install_basic_tools() {
         python3 \
         python3-dev \
         python3-pip \
-        python \
-        python-dev \
-        python-pip \
         npm
+        # python \
+        # python-dev \
+        # python-pip \
     ## Utilities
     sudo apt-get install -y -qq \
         sshfs \
@@ -1137,10 +1137,10 @@ run_install_python_basic() {
     sudo apt-get install -y -qq \
         libfreetype6-dev \
         libpng-dev \
-        python-qt4 \
         python3-pyqt5
     pip3 install pip==9.0.3
     hash -r pip
+    pip3 install -U cython
     pip3 install -U \
         ipython==7.0.1 \
         numpy==1.15.2 \
