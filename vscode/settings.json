@@ -1,6 +1,5 @@
 {
 	"python.pythonPath": "/app/dockvenv/bin/python3",
-	"diffEditor.originalEditable": true,
 	"window.zoomLevel": -1,
 	"editor.renderWhitespace": "all",
 	"editor.minimap.enabled": false,
@@ -14,9 +13,10 @@
 	"path-intellisense.absolutePathToWorkspace": false,
 	"path-intellisense.showHiddenFiles": true,
 	"cSpell.diagnosticLevel": "Hint",
+	"cSpell.language": "en,he",
 	// "vim.enableNeovim": true,
 	// "vim.neovimPath": "/usr/bin/nvim",
-	"vim.foldfix": true,
+	// "vim.foldfix": true,
 	"vim.leader": "<space>",
 	"vim.handleKeys": {
 			"<C-k>": false,
@@ -59,6 +59,118 @@
 			{
 				"before": ["leader", "P"],
 				"after": ["\"", "*", "P"]
+			}
+			{
+				"before": ["א"],
+				"after": ["t"]
+			},
+			{
+				"before": ["ב"],
+				"after": ["c"]
+			},
+			{
+				"before": ["ג"],
+				"after": ["d"]
+			},
+			{
+				"before": ["ד"],
+				"after": ["s"]
+			},
+			{
+				"before": ["ה"],
+				"after": ["v"]
+			},
+			{
+				"before": ["ו"],
+				"after": ["u"]
+			},
+			{
+				"before": ["ז"],
+				"after": ["z"]
+			},
+			{
+				"before": ["ח"],
+				"after": ["j"]
+			},
+			{
+				"before": ["ט"],
+				"after": ["y"]
+			},
+			{
+				"before": ["ט", "ט"],
+				"after": ["y", "y"]
+			},
+			{
+				"before": ["י"],
+				"after": ["h"]
+			},
+			{
+				"before": ["כ"],
+				"after": ["f"]
+			},
+			{
+				"before": ["ך"],
+				"after": ["l"]
+			},
+			{
+				"before": ["ל"],
+				"after": ["k"]
+			},
+			{
+				"before": ["מ"],
+				"after": ["n"]
+			},
+			{
+				"before": ["ם"],
+				"after": ["o"]
+			},
+			{
+				"before": ["נ"],
+				"after": ["b"]
+			},
+			{
+				"before": ["ן"],
+				"after": ["i"]
+			},
+			{
+				"before": ["ס"],
+				"after": ["x"]
+			},
+			{
+				"before": ["ע"],
+				"after": ["g"]
+			},
+			{
+				"before": ["פ"],
+				"after": ["p"]
+			},
+			{
+				"before": ["ף"],
+				"after": [";"]
+			},
+			{
+				"before": ["צ"],
+				"after": ["m"]
+			},
+			{
+				"before": ["ץ"],
+				"after": ["."]
+			},
+			{
+				"before": ["ק"],
+				"after": ["e"]
+			},
+			{
+				"before": ["ר"],
+				"after": ["r"]
+			},
+			{
+				"before": ["ש"],
+				"after": ["a"]
+			},
+			{
+				"before": ["ת"],
+				"after": [","]
 			}
 	],
 	"vim.normalModeKeyBindings": [
@@ -103,19 +215,149 @@
 				"after": ["y", "y", "p", "_", "w", "<C-v>", "$", "r", "-", "x"]
 			},
 			{
+				"before": ["leader", "ו"],
+				"after": ["y", "y", "p", "_", "w", "<C-v>", "$", "r", "-", "x"]
+			},
+			{
 				"before": ["leader", "U"],
 				"after": ["y", "y", "p", "_", "w", "<C-v>", "$", "r", "=", "x"]
+			},
+			{
+				"before": ["א"],
+				"after": ["t"]
+			},
+			{
+				"before": ["ב"],
+				"after": ["c"]
+			},
+			{
+				"before": ["ג"],
+				"after": ["d"]
+			},
+			{
+				"before": ["ג", "ג"],
+				"after": ["d", "d"]
+			},
+			{
+				"before": ["ד"],
+				"after": ["s"]
+			},
+			{
+				"before": ["ה"],
+				"after": ["v"]
+			},
+			{
+				"before": ["ו"],
+				"after": ["u"]
+			},
+			{
+				"before": ["ז"],
+				"after": ["z"]
+			},
+			{
+				"before": ["ח"],
+				"after": ["j"]
+			},
+			{
+				"before": ["ט"],
+				"after": ["y"]
+			},
+			{
+				"before": ["ט", "ט"],
+				"after": ["y", "y"]
+			},
+			{
+				"before": ["י"],
+				"after": ["h"]
+			},
+			{
+				"before": ["כ"],
+				"after": ["f"]
+			},
+			{
+				"before": ["ך"],
+				"after": ["l"]
+			},
+			{
+				"before": ["ל"],
+				"after": ["k"]
+			},
+			{
+				"before": ["מ"],
+				"after": ["n"]
+			},
+			{
+				"before": ["ם"],
+				"after": ["o"]
+			},
+			{
+				"before": ["נ"],
+				"after": ["b"]
+			},
+			{
+				"before": ["ן"],
+				"after": ["i"]
+			},
+			{
+				"before": ["ס"],
+				"after": ["x"]
+			},
+			{
+				"before": ["ע"],
+				"after": ["g"]
+			},
+			{
+				"before": ["פ"],
+				"after": ["p"]
+			},
+			{
+				"before": ["ף"],
+				"after": [";"]
+			},
+			{
+				"before": ["צ"],
+				"after": ["m"]
+			},
+			{
+				"before": ["ץ"],
+				"after": ["."]
+			},
+			{
+				"before": ["ק"],
+				"after": ["e"]
+			},
+			{
+				"before": ["ר"],
+				"after": ["r"]
+			},
+			{
+				"before": ["ש"],
+				"after": ["a"]
+			},
+			{
+				"before": ["ת"],
+				"after": [","]
 			}
 	],
 	"vim.insertModeKeyBindings": [
 			{
 				"before": ["j", "k"],
 				"after": ["<Esc>"]
+			},
+			{
+				"before": ["ח", "ל"],
+				"after": ["<Esc>"]
 			}
 	],
 	"vim.normalModeKeyBindingsNonRecursive": [
 			{
 					"before": ["leader", "w"],
+					"commands": [
+							"workbench.action.files.save",
+					]
+			},
+			{
+					"before": ["leader", "'"],
 					"commands": [
 							"workbench.action.files.save",
 					]
@@ -141,12 +383,9 @@
 	],
 	"vim.useSystemClipboard": false,
 	"telemetry.enableTelemetry": false,
-	"telemetry.enableCrashReporter": false,
-	"python.jediEnabled": false,
-	"python.dataScience.sendSelectionToInteractiveWindow": true,
+    "telemetry.enableCrashReporter": false,
 	"editor.autoClosingBrackets": "never",
-	"editor.autoClosingQuotes": "never",
-	"python.dataScience.askForKernelRestart": false,
+    "editor.autoClosingQuotes": "never",
 	"update.mode": "manual",
 	"files.autoSaveDelay": 60000,
 	"cSpell.userWords": [
@@ -233,4 +472,19 @@
 			"env": {}
 		}
 	],
+	"grammarly.domain": "technical",
+	"grammarly.severity": {
+		"verbs": 1,
+		"AccidentallyConfused": 2,
+		"Colloquial": 2,
+		"BasicPunct": 2,
+		"WordChoice": 2,
+		"PassiveVoice": 4
+	},
+	"spotify.showPlayButton": true,
+	"spotify.showPauseButton": true,
+    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltdLFwiZm9ybWF0V2lkdGhcIjpcIjI0MFwiLFwiY3JlYXRlVGFyZ2V0XCI6ZmFsc2UsXCJwYWdlRm9ybWF0XCI6e1wieFwiOjAsXCJ5XCI6MCxcIndpZHRoXCI6ODUwLFwiaGVpZ2h0XCI6MTEwMH0sXCJzZWFyY2hcIjp0cnVlLFwic2hvd1N0YXJ0U2NyZWVuXCI6dHJ1ZSxcImdyaWRDb2xvclwiOlwiI2QwZDBkMFwiLFwiZGFya0dyaWRDb2xvclwiOlwiIzZlNmU2ZVwiLFwiYXV0b3NhdmVcIjp0cnVlLFwicmVzaXplSW1hZ2VzXCI6bnVsbCxcIm9wZW5Db3VudGVyXCI6MCxcInZlcnNpb25cIjoxOCxcInVuaXRcIjoxLFwiaXNSdWxlck9uXCI6ZmFsc2UsXCJ1aVwiOlwiXCJ9In0=",
+    "jupyter.sendSelectionToInteractiveWindow": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.useNotebookEditor": false,
 }

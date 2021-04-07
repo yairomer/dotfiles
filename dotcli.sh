@@ -1652,63 +1652,7 @@ run_setup_gui_stuff() {
     ## ==========================
     echo "-> Install VSCode"
     sudo snap install code --classic
-
-    echo "-> Install VSCode extensions"
-    ## General
-    ## -------
-    code --install-extension streetsidesoftware.code-spell-checker
-    code --install-extension vscodevim.vim
-    code --install-extension CoenraadS.bracket-pair-colorizer
-    code --install-extension extr0py.vscode-relative-line-numbers
-    code --install-extension jdinhlife.gruvbox
-    code --install-extension christian-kohler.path-intellisense
-
-    ## Python
-    ## ------
-    code --install-extension ms-python.python
-
-    ## Bash
-    ## ----
-    code --install-extension rogalmic.bash-debug
-    code --install-extension mads-hartmann.bash-ide-vscode
-    sudo npm i -g bash-language-server
-
-    ## Web
-    ## ---
-    code --install-extension ritwickdey.LiveServer
-    code --install-extension ms-vscode.cpptools msjsdiag.debugger-for-chrome
-
-    ## Markdown
-    ## --------
-    code --install-extension DavidAnson.vscode-markdownlint
-    code --install-extension goessner.mdmath
-    code --install-extension bierner.markdown-preview-github-styles
-
-    ## CSV
-    ## ---
-    code --install-extension mechatroner.rainbow-csv
-    code --install-extension janisdd.vscode-edit-csv
-
-    ## XML
-    ## ---
-    code --install-extension DotJoshJohnson.xml
-
-    ## SVG
-    ## ---
-    code --install-extension jock.svg
-    code --install-extension cssho.vscode-svgviewer
-
-    ## Latex
-    ## -----
-    code --install-extension James-Yu.latex-workshop
-
-    ## Docker
-    ## ------
-    # code --install-extension ms-azuretools.vscode-docker
-
-    ## Remote
-    ## ------
-    code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+    run_install_vscode_extensions
 
     ## ==========================
     echo "-> Install PyCharm"
@@ -1736,6 +1680,48 @@ run_setup_gui_stuff() {
     # sudo apt-get update
     # sudo apt-get install -y papirus-icon-theme
     # gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+}
+
+## install_vscode_extensions
+## -------------------------
+subcommands+=( "install_vscode_extensions" )
+descriptions_tmp+=( "Install extensions for VS-Code." )
+
+run_install_vscode_extensions() {
+    echo "-> Install VSCode extensions"
+    code --install-extension auchenberg.vscode-browser-preview
+    code --install-extension christian-kohler.path-intellisense
+    code --install-extension CoenraadS.bracket-pair-colorizer
+    code --install-extension cssho.vscode-svgviewer
+    code --install-extension DavidAnson.vscode-markdownlint
+    code --install-extension DotJoshJohnson.xml
+    code --install-extension esbenp.prettier-vscode
+    code --install-extension extr0py.vscode-relative-line-numbers
+    code --install-extension goessner.mdmath
+    code --install-extension James-Yu.latex-workshop
+    code --install-extension janisdd.vscode-edit-csv
+    code --install-extension jdinhlife.gruvbox
+    code --install-extension jock.svg
+    code --install-extension kirozen.wordcounter
+    code --install-extension mads-hartmann.bash-ide-vscode
+    sudo npm i -g bash-language-server
+    code --install-extension mechatroner.rainbow-csv
+    # code --install-extension ms-azuretools.vscode-docker
+    code --install-extension ms-python.python
+    code --install-extension ms-toolsai.jupyter
+    code --install-extension ms-vscode.cpptools msjsdiag.debugger-for-chrome
+    # code --install-extension ms-vscode-remote.remote-containers
+    # code --install-extension ms-vscode-remote.remote-ssh
+    # code --install-extension ms-vscode-remote.remote-ssh-edit
+    # code --install-extension ms-vscode-remote.remote-wsl
+    code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+    # code --install-extension ms-vscode.cpptools
+    code --install-extension ritwickdey.LiveServer
+    code --install-extension rogalmic.bash-debug
+    code --install-extension streetsidesoftware.code-spell-checker
+    code --install-extension streetsidesoftware.code-spell-checker-hebrew
+    code --install-extension tht13.html-preview-vscode
+    code --install-extension vscodevim.vim
 }
 
 ## install_ocamlfuse
