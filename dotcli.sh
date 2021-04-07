@@ -1574,25 +1574,26 @@ run_setup_gui_stuff() {
         sudo apt-get install google-chrome-stable
     fi
 
-    ## ==========================
-    if [ ! -x "$(command -v mendeleydesktop)" ]; then
-        echo "-> Install Medndely"
-        sudo apt-get install -y gconf2
-        pushd /tmp
-        wget https://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
-        sudo dpkg -i mendeleydesktop-latest
-        popd
-        rm /tmp/mendeleydesktop-latest
-    fi
+    # ## ==========================
+    # if [ ! -x "$(command -v mendeleydesktop)" ]; then
+    #     echo "-> Install Medndely"
+    #     sudo apt-get install -y gconf2
+    #     pushd /tmp
+    #     # wget https://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
+    #     wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.19.4-stable_amd64.deb
+    #     sudo dpkg -i mendeleydesktop_1.19.4-stable_amd64.deb
+    #     popd
+    #     rm mendeleydesktop_1.19.4-stable_amd64.deb
+    # fi
 
     ## ==========================
     echo "-> Install VSCode"
     sudo snap install code --classic
     run_install_vscode_extensions
 
-    ## ==========================
-    echo "-> Install PyCharm"
-    sudo snap install pycharm-community --classic
+    # ## ==========================
+    # echo "-> Install PyCharm"
+    # sudo snap install pycharm-community --classic
 
     ## ==========================
     echo "-> Install MeshLab"
